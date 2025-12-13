@@ -5,11 +5,12 @@
 #define max_size 5 
 
 int stack[max_size],top=-1,flag=1; 
-int i,temp,item,rev[max_size],num[max_size]; 
+int i,temp,item,num[max_size]; 
 
 void push(); 
 void pop(); 
 void display(); 
+void palindrome(); 
 
 int main() 
 { 
@@ -19,7 +20,8 @@ int main()
     printf("1.Push\n"); 
     printf("2.Pop\n"); 
     printf("3.Display\n"); 
-    printf("4.Exit\n"); 
+    printf("4.Palindrome\n"); 
+    printf("5.Exit\n"); 
     printf(" "); 
     
     while(1) 
@@ -40,7 +42,10 @@ int main()
             case 3: 
                 display(); 
                 break; 
-            case 4: 
+            case 4:
+                palindrome();
+                break;
+            case 5: 
                 exit(0); 
                 break; 
             default: 
@@ -78,6 +83,28 @@ void pop()
         top = top - 1; 
         flag = 1;
     } 
+} 
+
+void palindrome() 
+{ 
+    int n, rev = 0; 
+    printf("Enter a number to check palindrome:\t"); 
+    scanf("%d",&n); 
+
+    temp = n; 
+    while (temp > 0) { 
+        stack[++top] = temp % 10; 
+        temp /= 10; 
+    } 
+
+    while (top >= 0) { 
+        rev = rev * 10 + stack[top--]; 
+    } 
+
+    if (rev == n) 
+        printf("Palindrome\n"); 
+    else 
+        printf("Not Palindrome\n"); 
 } 
 
 void display() 
